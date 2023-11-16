@@ -1,19 +1,22 @@
-﻿Program z_14;
+Program z_14;
 Var
   a, b, c : string;
-  i : integer;
+  n : integer;
 begin
   writeln('Введите строку: ');
-  readln(c); // считывание строки
-  a := 'word'; // присвоение переменным слова
-  b := 'letter';
+  readln(a); // считывание строки
   
-  for i := 1 to Length(c) do begin // цикл, для перебора слов в строке
-    if Copy(c, i, Length(a)) = a then // копирование слова
-      begin
-      Delete(c, i, Length(a)); // затем его удаление
-      Insert(b, c, i); // и замена
-  end;
-end;
-writeln(c);
+  b := 'word'; // слово для замены  
+  c := 'letter'; // новое слово
+
+  repeat
+    n := Pos(b, a); // находим позицию слова в строке
+    if n > 0 then begin
+      Delete(a, n, Length(b)); // удаляем найденное слово
+      Insert(c, a, n); // вставляем новое слово
+    end;
+  until n = 0; // продолжаем, пока есть слово для замены
+
+  writeln('Итоговая строка: ');
+  writeln(a);
 end.
